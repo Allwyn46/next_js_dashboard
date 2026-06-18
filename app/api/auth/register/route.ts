@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
                     token,
                 },
             },
-            { status: 400 }
+            { status: 200 }
         )
 
         response.cookies.set('token', token, {
@@ -94,7 +94,10 @@ export async function POST(request: NextRequest) {
         console.error('Registration Failed', error)
         return NextResponse.json(
             {
-                error: 'Something Went Wrong',
+                error: {
+                    message: 'Internal Server Error',
+                    error: error,
+                },
             },
             { status: 500 }
         )
